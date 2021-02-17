@@ -11,6 +11,18 @@ func LinearRegression(xs, ys []float64) (float64, float64) {
 	return stat.LinearRegression(xs, ys, nil, false)
 }
 
+// Gradient returns the gradient for the points at w and b.
+func Gradient(xs, ys []float64, w, b float64) (float64, float64) {
+	var sumW float64
+	var sumB float64
+	for i := 0; i < len(xs); i++ {
+		p := Predict(xs[i], w, b)
+		sumW += xs[i] * (p - ys[i])
+		sumB += p - ys[i]
+	}
+	return 2 * sumW / float64(len(xs)), 2 * sumB / float64(len(xs))
+}
+
 // Loss returns the mean squared error for the given data points and slope w.
 func Loss(xs, ys []float64, w, b float64) float64 {
 	var sum float64
