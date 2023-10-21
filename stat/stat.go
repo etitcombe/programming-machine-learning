@@ -3,6 +3,7 @@ package stat
 import (
 	"math"
 
+	"gonum.org/v1/gonum/mat"
 	"gonum.org/v1/gonum/stat"
 )
 
@@ -35,4 +36,15 @@ func Loss(xs, ys []float64, w, b float64) float64 {
 // Predict returns the predicted value for the given data x and slope w.
 func Predict(x, w, b float64) float64 {
 	return x*w + b
+}
+
+// LostMulti returns the mean squared error for the given multi-dimensional data and slope w.
+func LossMulti(mx, my, w *mat.Dense) *mat.Dense {
+	mx.
+}
+
+// PredictMulti returns the predicted value for the given multi-dimensional data x and slope w.
+func PredictMulti(x, w *mat.Dense) *mat.Dense {
+	x.Mul(x, w)
+	return x
 }
